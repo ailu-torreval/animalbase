@@ -75,11 +75,11 @@ function all() {
 }
 
 function filterAnimals(type) {
-  let filteredAndSortedArr = allAnimals.filter(isAnimalType);
+  filteredAndSortedArr = filteredAndSortedArr.filter(isAnimalType);
 
   function isAnimalType(animal) {
-    console.log("isanimaltype", animal);
     if (animal.type === type) {
+      console.log("isanimaltype", animal);
       return true;
     } else {
       return false;
