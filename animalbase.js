@@ -4,6 +4,8 @@ window.addEventListener("DOMContentLoaded", start);
 
 let allAnimals = [];
 let filteredAndSortedArr;
+
+let selectedAnimals = [];
 // The prototype for all animals:
 const Animal = {
   name: "",
@@ -16,19 +18,24 @@ function start() {
   console.log("ready");
   document
     .querySelector("[data-filter=cat]")
-    .addEventListener("click", filterCats);
+    .addEventListener("click", function () {
+      filterAnimals(this.dataset.filter);
+    });
   document
     .querySelector("[data-filter=dog]")
-    .addEventListener("click", filterDogs);
+    .addEventListener("click", function () {
+      filterAnimals(this.dataset.filter);
+    });
   document.querySelector(".filter-all").addEventListener("click", all);
-
   document
     .querySelector("[data-sort=name]")
-    .addEventListener("click", sortbyName);
-
+    .addEventListener("click", sortNames);
   document
     .querySelector("[data-sort=type]")
-    .addEventListener("click", sortbyType);
+    .addEventListener("click", sortType);
+  // document
+  //   .querySelector("[data-sort=desc]")
+  //   .addEventListener("click", sortDesc);
   // TODO: Add event-listeners to filter and sort buttons
   loadJSON();
 }
@@ -67,33 +74,52 @@ function all() {
   displayList(filteredAndSortedArr);
 }
 
-function filterCats() {
-  filteredAndSortedArr = allAnimals.filter(isCat);
+function filterAnimals(type) {
+  let filteredAndSortedArr = allAnimals.filter(isAnimalType);
+
+  function isAnimalType(animal) {
+    console.log("isanimaltype", animal);
+    if (animal.type === type) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   displayList(filteredAndSortedArr);
 }
 
-function filterDogs() {
-  filteredAndSortedArr = allAnimals.filter(isDog);
-  displayList(filteredAndSortedArr);
-}
+// function all() {
+//   filteredAndSortedArr = allAnimals;
+//   displayList(filteredAndSortedArr);
+// }
 
-function isCat(animal) {
-  if (animal.type === "cat") {
-    return true;
-  } else {
-    return false;
-  }
-}
+// function filterCats() {
+//   filteredAndSortedArr = allAnimals.filter(isCat);
+//   displayList(filteredAndSortedArr);
+// }
 
-function isDog(animal) {
-  if (animal.type === "dog") {
-    return true;
-  } else {
-    return false;
-  }
-}
+// function filterDogs() {
+//   filteredAndSortedArr = allAnimals.filter(isDog);
+//   displayList(filteredAndSortedArr);
+// }
 
-function sortbyName() {
+// function isCat(animal) {
+//   if (animal.type === "cat") {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
+
+// function isDog(animal) {
+//   if (animal.type === "dog") {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
+
+function sortNames() {
   filteredAndSortedArr.sort(compareNames);
   displayList(filteredAndSortedArr);
 }
@@ -105,7 +131,7 @@ function compareNames(a, b) {
   }
 }
 
-function sortbyType() {
+function sortType() {
   filteredAndSortedArr.sort(compareTypes);
   displayList(filteredAndSortedArr);
 }
@@ -143,9 +169,22 @@ function displayAnimal(animal) {
     clone.querySelector("[data-field=star]").textContent = "☆";
   }
 
+  if (animal.winner) {
+    clone.querySelector("[data-field=winner]").classList.remove("grey");
+  } else {
+    clone.querySelector("[data-field=winner]").classList.add("grey");
+  }
+
   clone
     .querySelector("[data-field=star]")
     .addEventListener("click", starClicked);
+
+  clone
+    .querySelector("[data-field=winner]")
+    .addEventListener("click", function (event) {
+      trophyClicked(event.target);
+      selectedAnimals.push(animal);
+    });
 
   function starClicked() {
     console.log("start clicked");
@@ -157,6 +196,37 @@ function displayAnimal(animal) {
     console.log("animal star", animal.star);
     displayList();
   }
+
+  function trophyClicked() {
+    console.log("trophyClicked");
+    if (animal.winner) {
+      animal.winner = false;
+    } else {
+      animal.winner = true;
+    }
+    console.log("selected animals are", selectedAnimals);
+    isMoreThan2();
+    // areTheSameType();
+    displayList();
+  }
+  function isMoreThan2() {
+    if (selectedAnimals.length >= 2) {
+      clone
+        .querySelector("[data-field=winner]")
+        .removeEventListener("click", function (event) {
+          trophyClicked(event.target);
+        });
+      console.log("we have", selectednimals.length);
+    } else {
+    }
+  }
+  // function areTheSameType() {
+  //   let animal1 = selectedAnimals[0];
+  //   let animal2 = selectedAnimals[1];
+  //   if (animal1.type === animal2.type) {
+  //     console.log("no two of the same");
+  //   }
+  // }
 
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);

@@ -1,49 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Animalbase</title>
-    <link rel="stylesheet" href="animalbase.css">
-  </head>
-  <body>
-    <h1>Animals</h1>
-    <p>
-      Filter:
-      <button class="filter-cat" data-action="filter" data-filter="cat">Only Cats</button>
-      <button class="filter-dog" data-action="filter" data-filter="dog">Only Dogs</button>
-      <button class="filter-all" class="filter-all" data-action="filter" data-filter="*">all</button>
-    </p>
 
-    <hr>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Animalbase</title>
+  <link rel="stylesheet" href="animalbase.css">
+</head>
 
-    <table id="list">
-      <thead>
-        <tr id="sorting">
-          <th data-action="sort" data-sort-direction="asc" data-sort="star">⭐</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="name">Name</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="type">Type</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="desc">Description</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="age">Age</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- animal template will be copied and inserted here -->
-      </tbody>
-    </table>
+<body>
+  <h1>Animals</h1>
+  <p>
+    Filter:
+    <button class="filter-cat" data-action="filter" data-filter="cat">Only Cats</button>
+    <button class="filter-dog" data-action="filter" data-filter="dog">Only Dogs</button>
+    <button class="filter-all" class="filter-all" data-action="filter" data-filter="*">all</button>
+  </p>
 
-    <template id="animal">
-      <tr>
-        <td data-field="star">⭐</td>
-        <td data-field="name">NAME</td>
-        <td data-field="type">TYPE</td>
-        <td data-field="desc">DESCRIPTION</td>
-        <td data-field="age">AGE</td>
+  <hr>
+
+  <table id="list">
+    <thead>
+      <tr id="sorting">
+        <th data-action="sort" data-sort-direction="asc" data-sort="winner">🏆</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="star">⭐</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="name">Name</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="type">Type</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="desc">Description</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="age">Age</th>
       </tr>
-    </template>
+    </thead>
+    <tbody>
+      <!-- animal template will be copied and inserted here -->
+    </tbody>
+  </table>
 
-    
-    <script src="animalbase.js"></script>
-  </body>
+  <template id="animal">
+    <tr>
+      <td data-field="winner" class="grey">🏆</td>
+      <td data-field="star">⭐</td>
+      <td data-field="name">NAME</td>
+      <td data-field="type">TYPE</td>
+      <td data-field="desc">DESCRIPTION</td>
+      <td data-field="age">AGE</td>
+    </tr>
+  </template>
+
+  <div id="onlytwowinners" class="dialog">
+    <div class="dialogcontent">
+      <button class="closebutton">close</button>
+      <h1>You can only have two winners!</h1>
+      <h2>Remove one, before you appoint more</h2>
+      <p><button data-action="remove1">remove</button> <span class="animal1">NAME, the TYPE</span></p>
+      <p><button data-action="remove2">remove</button> <span class="animal2">NAME, the TYPE</span></p>
+    </div>
+  </div>
+
+  <div id="onlyonekind" class="dialog">
+    <div class="dialogcontent">
+      <button class="closebutton">close</button>
+      <h1>You can only have one winner of each type</h1>
+      <h2>Remove the other if you want to appoint a new one</h2>
+      <p><button data-action="remove1">remove</button> <span class="animal1">NAME, the TYPE</span></p>
+    </div>
+  </div>
+
+  <script src="animalbase.js"></script>
+</body>
+
 </html>
