@@ -33,10 +33,10 @@ function start() {
   document
     .querySelector("[data-sort=type]")
     .addEventListener("click", sortType);
-  // document
-  //   .querySelector("[data-sort=desc]")
-  //   .addEventListener("click", sortDesc);
-  // TODO: Add event-listeners to filter and sort buttons
+  document
+    .querySelector("[data-sort=desc]")
+    .addEventListener("click", sortDesc);
+  document.querySelector("[data-sort=age]").addEventListener("click", sortAge);
   loadJSON();
 }
 
@@ -88,37 +88,6 @@ function filterAnimals(type) {
   displayList(filteredAndSortedArr);
 }
 
-// function all() {
-//   filteredAndSortedArr = allAnimals;
-//   displayList(filteredAndSortedArr);
-// }
-
-// function filterCats() {
-//   filteredAndSortedArr = allAnimals.filter(isCat);
-//   displayList(filteredAndSortedArr);
-// }
-
-// function filterDogs() {
-//   filteredAndSortedArr = allAnimals.filter(isDog);
-//   displayList(filteredAndSortedArr);
-// }
-
-// function isCat(animal) {
-//   if (animal.type === "cat") {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
-
-// function isDog(animal) {
-//   if (animal.type === "dog") {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
-
 function sortNames() {
   filteredAndSortedArr.sort(compareNames);
   displayList(filteredAndSortedArr);
@@ -137,6 +106,30 @@ function sortType() {
 }
 function compareTypes(a, b) {
   if (a.type < b.type) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function sortDesc() {
+  filteredAndSortedArr.sort(compareDesc);
+  displayList(filteredAndSortedArr);
+}
+function compareDesc(a, b) {
+  if (a.desc < b.desc) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function sortAge() {
+  filteredAndSortedArr.sort(compareAge);
+  displayList(filteredAndSortedArr);
+}
+function compareAge(a, b) {
+  if (a.age < b.age) {
     return -1;
   } else {
     return 1;
