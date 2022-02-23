@@ -75,7 +75,7 @@ function all() {
 }
 
 function filterAnimals(type) {
-  filteredAndSortedArr = filteredAndSortedArr.filter(isAnimalType);
+  filteredAndSortedArr = allAnimals.filter(isAnimalType);
 
   function isAnimalType(animal) {
     if (animal.type === type) {
@@ -176,6 +176,7 @@ function displayAnimal(animal) {
     .querySelector("[data-field=winner]")
     .addEventListener("click", function (event) {
       trophyClicked(event.target);
+      console.log("select anim", selectedAnimals);
       selectedAnimals.push(animal);
     });
 
@@ -191,28 +192,38 @@ function displayAnimal(animal) {
   }
 
   function trophyClicked() {
-    console.log("trophyClicked");
     if (animal.winner) {
       animal.winner = false;
     } else {
+      // selectedAnimals.splice(animal);
       animal.winner = true;
     }
-    console.log("selected animals are", selectedAnimals);
-    isMoreThan2();
-    // areTheSameType();
     displayList();
   }
-  function isMoreThan2() {
-    if (selectedAnimals.length >= 2) {
-      clone
-        .querySelector("[data-field=winner]")
-        .removeEventListener("click", function (event) {
-          trophyClicked(event.target);
-        });
-      console.log("we have", selectednimals.length);
-    } else {
-    }
-  }
+
+  // function trophyClicked() {
+  //   console.log("trophyClicked");
+  //   if (animal.winner) {
+  //     animal.winner = false;
+  //   } else {
+  //     animal.winner = true;
+  //   }
+  //   console.log("selected animals are", selectedAnimals);
+  //   isMoreThan2();
+  //   // areTheSameType();
+  //   displayList();
+  // }
+  // function isMoreThan2() {
+  //   if (selectedAnimals.length >= 2) {
+  //     clone
+  //       .querySelector("[data-field=winner]")
+  //       .removeEventListener("click", function (event) {
+  //         trophyClicked(event.target);
+  //       });
+  //     console.log("we have", selectednimals.length);
+  //   } else {
+  //   }
+  // }
   // function areTheSameType() {
   //   let animal1 = selectedAnimals[0];
   //   let animal2 = selectedAnimals[1];
