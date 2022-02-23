@@ -4,14 +4,18 @@ window.addEventListener("DOMContentLoaded", start);
 
 let allAnimals = [];
 let filteredAndSortedArr;
+let winnerAnimals = [];
 
-let selectedAnimals = [];
+let selectedAnimals = [
+  // { name: "bunny", desc: "messy", type: "rabbit", age: "2" },
+];
 // The prototype for all animals:
 const Animal = {
   name: "",
   desc: "-unknown animal-",
   type: "",
   age: 0,
+  winner: false,
 };
 
 function start() {
@@ -175,9 +179,9 @@ function displayAnimal(animal) {
   clone
     .querySelector("[data-field=winner]")
     .addEventListener("click", function (event) {
-      trophyClicked(event.target);
+      checkTrophy(event.target);
       console.log("select anim", selectedAnimals);
-      selectedAnimals.push(animal);
+      // selectedAnimals.push(animal);
     });
 
   function starClicked() {
@@ -191,12 +195,58 @@ function displayAnimal(animal) {
     displayList();
   }
 
-  function trophyClicked() {
-    if (animal.winner) {
-      animal.winner = false;
-    } else {
-      // selectedAnimals.splice(animal);
-      animal.winner = true;
+  function checkTrophy() {
+    selectedAnimals.push(animal);
+    // checked if we can add the animal to the winners list
+
+    if (selectedAnimals.length === 1) {
+      console.log("youcan go");
+      clickedTrophy();
+    } else if (selectedAnimals.length === 2) {
+      console.log("are the same type?");
+    } else if (selectedAnimals.length > 2) {
+      console.log("thats too much");
+    }
+
+    // if (isMoreThan2(selectedAnimals)) {
+    //   console.log("too much winners");
+    //   // show popup function here
+    //   // tooMuchWinners();
+    // } else {
+    //   // isTheSameType(selectedAnimals);
+    // }
+
+    // if (isMoreThan1(selectedAnimals)) {
+    //   console.log("tyou can go");
+    //   // show popup function here
+    //   // tooMuchWinners();
+    // } else {
+    //   isTheSameType(selectedAnimals);
+    // }
+
+    // function isMoreThan2(selectedAnimals) {
+    //   if (selectedAnimals.length > 2) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // }
+
+    function isTheSameType(selectedAnimals) {
+      if (selectedAnimals[1].type === selectedAnimals[1].type) {
+        console.log("they are the same");
+      } else {
+        console.log("they are different");
+      }
+    }
+
+    function clickedTrophy() {
+      if (animal.winner) {
+        animal.winner = false;
+      } else {
+        // selectedAnimals.splice(animal);
+        animal.winner = true;
+      }
     }
     displayList();
   }
