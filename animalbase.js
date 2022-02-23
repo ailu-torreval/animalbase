@@ -204,45 +204,27 @@ function displayAnimal(animal) {
       clickedTrophy();
     } else if (selectedAnimals.length === 2) {
       console.log("are the same type?");
+      isTheSameType(selectedAnimals);
     } else if (selectedAnimals.length > 2) {
       console.log("thats too much");
+      selectedAnimals.pop();
     }
 
-    // if (isMoreThan2(selectedAnimals)) {
-    //   console.log("too much winners");
-    //   // show popup function here
-    //   // tooMuchWinners();
-    // } else {
-    //   // isTheSameType(selectedAnimals);
-    // }
-
-    // if (isMoreThan1(selectedAnimals)) {
-    //   console.log("tyou can go");
-    //   // show popup function here
-    //   // tooMuchWinners();
-    // } else {
-    //   isTheSameType(selectedAnimals);
-    // }
-
-    // function isMoreThan2(selectedAnimals) {
-    //   if (selectedAnimals.length > 2) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // }
-
     function isTheSameType(selectedAnimals) {
-      if (selectedAnimals[1].type === selectedAnimals[1].type) {
+      if (selectedAnimals[0].type === selectedAnimals[1].type) {
         console.log("they are the same");
+        selectedAnimals.pop();
       } else {
         console.log("they are different");
+        clickedTrophy();
       }
     }
 
     function clickedTrophy() {
       if (animal.winner) {
         animal.winner = false;
+        winnerAnimals.push();
+        console.log("winners", winnerAnimals);
       } else {
         // selectedAnimals.splice(animal);
         animal.winner = true;
@@ -250,38 +232,6 @@ function displayAnimal(animal) {
     }
     displayList();
   }
-
-  // function trophyClicked() {
-  //   console.log("trophyClicked");
-  //   if (animal.winner) {
-  //     animal.winner = false;
-  //   } else {
-  //     animal.winner = true;
-  //   }
-  //   console.log("selected animals are", selectedAnimals);
-  //   isMoreThan2();
-  //   // areTheSameType();
-  //   displayList();
-  // }
-  // function isMoreThan2() {
-  //   if (selectedAnimals.length >= 2) {
-  //     clone
-  //       .querySelector("[data-field=winner]")
-  //       .removeEventListener("click", function (event) {
-  //         trophyClicked(event.target);
-  //       });
-  //     console.log("we have", selectednimals.length);
-  //   } else {
-  //   }
-  // }
-  // function areTheSameType() {
-  //   let animal1 = selectedAnimals[0];
-  //   let animal2 = selectedAnimals[1];
-  //   if (animal1.type === animal2.type) {
-  //     console.log("no two of the same");
-  //   }
-  // }
-
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
 }

@@ -54,7 +54,8 @@
 
 /******** DIALOG styling **********/
 
-.dialog {
+#onlytwowinners,
+#onlyonekind {
   display: none;
 }
 
