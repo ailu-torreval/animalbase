@@ -47,22 +47,22 @@
     </tr>
   </template>
 
-  <div id="onlytwowinners" class="dialog">
+  <div id="onlytwowinners" class="hidden">
     <div class="dialogcontent">
       <button class="closebutton">close</button>
       <h1>You can only have two winners!</h1>
       <h2>Remove one, before you appoint more</h2>
-      <p><button data-action="remove1">remove</button> <span class="animal1">NAME, the TYPE</span></p>
-      <p><button data-action="remove2">remove</button> <span class="animal2">NAME, the TYPE</span></p>
+      <p id="btn1"><button data-action="remove1">remove</button><span id="animal1"></p>
+      <p id="btn2"><button data-action="remove2">remove</button><span id="animal2"></p>
     </div>
   </div>
 
-  <div id="onlyonekind" class="dialog">
+  <div id="onlyonekind" class="hidden">
     <div class="dialogcontent">
-      <button class="closebutton">close</button>
+      <button class="closebutton3">close</button>
       <h1>You can only have one winner of each type</h1>
       <h2>Remove the other if you want to appoint a new one</h2>
-      <p><button data-action="remove1">remove</button> <span class="animal1">NAME, the TYPE</span></p>
+      <p id="btn3"><button id="remove-button" data-action="remove1">remove</button> <span id="animalx"></span></p>
     </div>
   </div>
 

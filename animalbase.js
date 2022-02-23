@@ -208,12 +208,14 @@ function displayAnimal(animal) {
     } else if (selectedAnimals.length > 2) {
       console.log("thats too much");
       selectedAnimals.pop();
+      showTooManyPopup();
     }
 
     function isTheSameType(selectedAnimals) {
       if (selectedAnimals[0].type === selectedAnimals[1].type) {
         console.log("they are the same");
         selectedAnimals.pop();
+        showSameTypePopup();
       } else {
         console.log("they are different");
         clickedTrophy();
@@ -230,6 +232,66 @@ function displayAnimal(animal) {
         animal.winner = true;
       }
     }
+    function showTooManyPopup() {
+      console.log("showTooMAny");
+      // show screen
+      // print name 1 and2
+      document.querySelector("#onlytwowinners").classList.remove("hidden");
+      document.querySelector(
+        "#animal1"
+      ).textContent = ` ${selectedAnimals[0].name}, the ${selectedAnimals[0].type}`;
+      document.querySelector(
+        "#animal2"
+      ).textContent = ` ${selectedAnimals[1].name}, the ${selectedAnimals[1].type}`;
+      document
+        .querySelector("[data-action=remove1]")
+        .addEventListener("click", removePUAnimal1);
+
+      document
+        .querySelector("[data-action=remove2]")
+        .addEventListener("click", removePUAnimal2);
+      document
+        .querySelector(".closebutton")
+        .addEventListener("click", closePU1);
+    }
+
+    function showSameTypePopup() {
+      console.log("show the same");
+      // show screen
+      // print name 1 and2
+      document.querySelector("#onlyonekind").classList.remove("hidden");
+      document.querySelector(
+        "#animalx"
+      ).textContent = ` ${selectedAnimals[0].name}, the ${selectedAnimals[0].type}`;
+      document
+        .querySelector("#remove-button")
+        .addEventListener("click", removePUAnimal3);
+      document
+        .querySelector(".closebutton3")
+        .addEventListener("click", closePU3);
+    }
+    function removePUAnimal1() {
+      selectedAnimals.shift();
+      document.querySelector("#btn1").classList.add("hidden");
+    }
+    function removePUAnimal2() {
+      selectedAnimals.pop();
+      document.querySelector("#btn2").classList.add("hidden");
+    }
+
+    function removePUAnimal3() {
+      selectedAnimals.shift();
+      document.querySelector("#btn3").classList.add("hidden");
+    }
+
+    function closePU1() {
+      document.querySelector("#onlytwowinners").classList.add("hidden");
+    }
+
+    function closePU3() {
+      document.querySelector("#onlyonekind").classList.add("hidden");
+    }
+
     displayList();
   }
   // append clone to list
