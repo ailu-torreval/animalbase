@@ -69,6 +69,7 @@ function preapareObject(jsonObject) {
   animal.desc = texts[2];
   animal.type = texts[3];
   animal.age = jsonObject.age;
+  animal.winner = false;
 
   return animal;
 }
@@ -197,7 +198,16 @@ function displayAnimal(animal) {
 
   function checkTrophy() {
     selectedAnimals.push(animal);
-    // checked if we can add the animal to the winners list
+
+    function clickedTrophy() {
+      if (animal.winner) {
+        animal.winner = false;
+      } else {
+        // selectedAnimals.splice(animal);
+        animal.winner = true;
+      }
+      displayList();
+    }
 
     if (selectedAnimals.length === 1) {
       console.log("youcan go");
@@ -206,7 +216,7 @@ function displayAnimal(animal) {
       console.log("are the same type?");
       isTheSameType(selectedAnimals);
     } else if (selectedAnimals.length > 2) {
-      console.log("thats too much");
+      console.log("thats too many");
       selectedAnimals.pop();
       showTooManyPopup();
     }
@@ -222,16 +232,6 @@ function displayAnimal(animal) {
       }
     }
 
-    function clickedTrophy() {
-      if (animal.winner) {
-        animal.winner = false;
-        winnerAnimals.push();
-        console.log("winners", winnerAnimals);
-      } else {
-        // selectedAnimals.splice(animal);
-        animal.winner = true;
-      }
-    }
     function showTooManyPopup() {
       console.log("showTooMAny");
       // show screen
@@ -282,6 +282,7 @@ function displayAnimal(animal) {
     function removePUAnimal3() {
       selectedAnimals.shift();
       document.querySelector("#btn3").classList.add("hidden");
+      console.log("animal", animal);
     }
 
     function closePU1() {
